@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Employee.Models.Employees>
+
+<h2>Employee List</h2>
+<a href="@Url.Action("Create", "Employee")" class="btn btn-primary">New Employee</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Designation</th>
+            <th>DOJ</th>
+            <th>Salary</th>
+            <th>Gender</th>
+            <th>State</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.EmployeeID</td>
+                <td>
+                    <!-- Clicking on Name takes you to Edit Form -->
+                    <a href="@Url.Action("Edit", "Employee", new { id = employee.EmployeeID })">
+                        @employee.EmployeeName
+                    </a>
+                </td>
+                <td>@employee.Designation</td>
+                <td>@employee.DateOfJoining.ToString("dd/MM/yyyy")</td>
+                <td>@employee.Salary</td>
+                <td>@employee.Gender</td>
+                <td>@employee.State</td>
+                <td>
+                    <!-- Delete Button -->
+                    <a href="@Url.Action("Delete", "Employee", new { id = employee.EmployeeID })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Total Salary: @ViewBag.TotalSalary</h4>

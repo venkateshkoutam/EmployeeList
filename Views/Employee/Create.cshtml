@@ -1,0 +1,61 @@
+﻿@model Employee.Models.Employees
+
+<h2>Create Employee</h2>
+
+@using (Html.BeginForm("Create", "Employee", FormMethod.Post, new { id = "createEmployeeForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <!-- EmployeeName Field -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.EmployeeName)
+        @Html.TextBoxFor(model => model.EmployeeName, new { @class = "form-control", id = "EmployeeName" })
+        @Html.ValidationMessageFor(model => model.EmployeeName, "", new { @class = "text-danger" })
+    </div>
+
+    <!-- Designation Field -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.Designation)
+        @Html.TextBoxFor(model => model.Designation, new { @class = "form-control", id = "Designation" })
+        @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+    </div>
+
+    <!-- DateOfJoining Field -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.DateOfJoining)
+        @Html.TextBoxFor(model => model.DateOfJoining, new { @class = "form-control", type = "date", id = "DateOfJoining" })
+        @Html.ValidationMessageFor(model => model.DateOfJoining, "", new { @class = "text-danger" })
+    </div>
+
+    <!-- Salary Field -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.Salary)
+        @Html.TextBoxFor(model => model.Salary, new { @class = "form-control", type = "number", step = "0.01", id = "Salary" })
+        @Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-danger" })
+    </div>
+
+    <!-- Gender Field -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.Gender)
+        <label>@Html.RadioButtonFor(model => model.Gender, "M") Male</label>
+        <label>@Html.RadioButtonFor(model => model.Gender, "F") Female</label>
+        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+    </div>
+
+    <!-- State Field -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.State)
+        @Html.DropDownListFor(model => model.State, new SelectList(new[] {
+    new { Text = "Select State", Value = "" },
+    new { Text = "Andhra Pradesh", Value = "Andhra Pradesh" },
+    new { Text = "Karnataka", Value = "Karnataka" }
+    }, "Value", "Text"), new { @class = "form-control", id = "State" })
+        @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section Scripts {
+    @* jQuery Validation Scripts will be automatically loaded due to @Scripts.Render and Unobtrusive Validation *@
+}
